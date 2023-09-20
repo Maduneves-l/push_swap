@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:13:09 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/20 11:35:19 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:15:36 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,17 @@ int	main(int ac, char **av)
 	print(stack_a);
 	printf("stack_b:\n");
 	print(stack_b);
-	do_push(&stack_b, &stack_a, 'a');
+	do_push(&stack_a, &stack_b, 'a');
 	printf("stack_a:\n");
 	print(stack_a);
+	printf("stack_b:\n");
+	print(stack_b);
+	do_rotate(&stack_a, 'a');
+	printf("stack_a:\n");
+	print(stack_a);
+	printf("stack_b:\n");
+	print(stack_b);
+	rev_rotate(&stack_b, 'b');
 	printf("stack_b:\n");
 	print(stack_b);
 	free(stack_a);

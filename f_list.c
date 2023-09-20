@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:32:38 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/12 16:34:42 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:41:31 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,11 @@ t_list	*ft_lstnew(int n)
 	return (node);
 }
 
-int	ft_lstsize(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	i;
-
-	i = 0;
-	while (lst != NULL)
-	{
-		i++;
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
 		lst = lst->next;
-	}
-	return (i);
+	return (lst);
 }

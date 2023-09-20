@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:49:11 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/20 11:32:53 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:12:48 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ void    do_swap(t_list ** stack, char flag)
     else if(flag == 'b')
          write(1, "sb\n", 3);
 }
-
-void    ss_swap(t_list **stack_a, t_list **stack_b, char flag)
-{
-    do_swap(stack_a, flag);
-    do_swap(stack_b, flag);
-    if(flag == 's')
-        write(1, "ss\n", 3);
-}
-
 void    do_push(t_list **dest, t_list **src, char c)
 {
     t_list *tmp;
@@ -50,4 +41,39 @@ void    do_push(t_list **dest, t_list **src, char c)
         write(1, "pa\n", 3);
     else if (c == 'b')
         write(1, "pb\n", 3);
+}
+
+void    do_rotate(t_list ** stack, char c)
+{
+    t_list *tmp;
+    if(!stack || !*stack)
+        return ;
+    tmp = *stack;
+    *stack = (*stack)->next;
+    tmp->next = NULL;
+    ft_lstadd_back(stack, tmp);
+    if (c == 'a')
+        write(1, "ra\n", 3);
+    if (c == 'b')
+        write(1, "rb\n", 3);
+    
+}
+
+void    rev_rotate(t_list **stack, char c)
+{
+    t_list *last;
+    t_list *cursor;
+    if(!stack || !*stack)
+        return ;
+    cursor = *stack;
+    last = ft_lstlast(*stack);
+    while(cursor->next != last)
+        cursor = cursor->next;
+    cursor->next = NULL;
+    ft_lstadd_front(stack, last);
+        
+    if (c == 'a')
+        write(1, "rra\n", 4);
+    else if (c == 'b')
+        write(1, "rrb\n", 4);
 }
