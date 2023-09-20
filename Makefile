@@ -3,7 +3,6 @@
 ##########################################################
 
 NAME =  push_swap
-BONUS_NAME = 
 CFLAGS = -Wall -Werror -Wextra  -g #-fsanitize=address 
 CC = cc 
 
@@ -11,7 +10,9 @@ CC = cc
 #					SOURCES AND OBJS					 #
 ##########################################################
 
-SRCS = main.c f_list.c utils.c\
+SRCS = f_list.c main.c utils.c moves.c \
+
+INCLUDES = includes
 
 OBJS :=$(SRCS:.c=.o)
 
@@ -43,7 +44,7 @@ $(NAME) : $(OBJS)
 	@echo "$(CYAN)$(NAME) ${CLR_RMV}$(GREEN)created with sucess ${CLR_RMV} ✔️"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $(^) -o $(@)
+	$(CC) $(CFLAGS) -I$(INCLUDES) -c $(^) -o $(@)
 
 clean:
 	rm -f $(OBJS)

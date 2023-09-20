@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:13:09 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/12 16:44:07 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:35:19 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int ac, char **av)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	int i;
+	i = 0;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -24,11 +26,26 @@ int	main(int ac, char **av)
 		write(2, " Error: Invalid number of arguments\n", 36);
 		exit(EXIT_FAILURE);
 	}
+	while(i < 4)
+	{
+		ft_lstadd_back(&stack_b, ft_lstnew(i));
+		i++;
+	}
 	number_to_list(av, &stack_a);
-    if(need_push(&stack_a))
-    {
-        
-    }
+	printf("stack_b:\n");
+	print(stack_b);
+	printf("stack_a:\n");
+	print(stack_a);
+	do_swap(&stack_a, 'a');
+	printf("stack_a:\n");
+	print(stack_a);
+	printf("stack_b:\n");
+	print(stack_b);
+	do_push(&stack_b, &stack_a, 'a');
+	printf("stack_a:\n");
+	print(stack_a);
+	printf("stack_b:\n");
+	print(stack_b);
 	free(stack_a);
 	free(stack_b);
 }
@@ -47,4 +64,15 @@ int	need_push(t_list **list)
 		tmp = tmp->next;
 	}
 	return (1);
+}
+
+void 	print(t_list *stack)
+{
+	t_list *tmp;
+	tmp = stack;
+ 	while(tmp)
+	{
+		printf("num = %d\n", tmp->num);
+		tmp = tmp->next;
+	}
 }
