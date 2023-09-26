@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:32:38 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/20 17:41:31 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/21 09:33:37 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	ft_lstclear(t_list **lst)
 {
 	t_list	*current;
 
-    if(!*lst)
-        return ;
+	if (!*lst)
+		return ;
 	while (*lst)
 	{
 		current = (*lst)->next;

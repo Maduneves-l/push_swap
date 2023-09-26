@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 13:08:43 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/12 16:37:17 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:19:18 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	number_to_list(char **av, t_list **list)
 	long long	n;
 	int			i;
 
-	
 	i = 0;
 	while (av[++i])
 	{
@@ -76,20 +75,19 @@ int	check_repeat(t_list **list, int n)
 	return (0);
 }
 
-//função que transforma char para int 
+//função que transforma char para int
 long long	ft_atoi(char *s)
 {
-	long long i;
-	long long res;
-	long long sign;
+	long long	i;
+	long long	res;
+	long long	sign;
 
 	i = 0;
 	res = 0;
 	sign = 1;
-
 	if (s[i] == '-' || s[i] == '+')
 	{
-		if(s[i] == '-')
+		if (s[i] == '-')
 			sign *= -1;
 		i++;
 	}
@@ -101,6 +99,7 @@ long long	ft_atoi(char *s)
 	}
 	return (sign * res);
 }
+
 //função para casos de erros
 void	error(t_list *list)
 {
