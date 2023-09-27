@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_5.c                                           :+:      :+:    :+:   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 14:20:27 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/26 13:19:43 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:11:51 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,20 @@ int	ft_lstsize(t_list *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+//função que verifica se os argumentos já
+//estão organizados (if need push)
+int	need_sort(t_list **list)
+{
+	t_list	*tmp;
+
+	tmp = *list;
+	while (tmp->next)
+	{
+		if (tmp->num > tmp->next->num)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

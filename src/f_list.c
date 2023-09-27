@@ -6,7 +6,7 @@
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:32:38 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/21 09:33:37 by mneves-l         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:35:04 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_list	*ft_lstnew(int n)
 	if (!node)
 		return (NULL);
 	node->num = n;
+	node->index = -1;
 	node->next = NULL;
 	return (node);
 }

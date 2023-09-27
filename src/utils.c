@@ -5,116 +5,105 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mneves-l <mneves-l@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 17:49:05 by mneves-l          #+#    #+#             */
-/*   Updated: 2023/09/26 17:55:02 by mneves-l         ###   ########.fr       */
+/*   Created: 2023/09/11 13:08:43 by mneves-l          #+#    #+#             */
+/*   Updated: 2023/09/25 14:19:18 by mneves-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	number_pieces(int len)
+//função que verifica se o argumento passado é um int válido,
+//se não tem números repetidos e depois organiza os números na lista (stack_a)
+void	number_to_list(char **av, t_list **list)
 {
-	int	pieces;
+	long long	n;
+	int			i;
 
-	pieces = 1;
-	if (len == 100)
-		pieces = 2;
-	else if (len == 500)
-		pieces = 5;
-	return (pieces);
+	i = 0;
+	while (av[++i])
+	{
+		if (check_int(av[i]))
+		{
+			n = ft_atoi(av[i]);
+			if (n > INT_MAX || n < INT_MIN)
+				error(*list);
+			if (check_repeat(list, n))
+				error(*list);
+			ft_lstadd_back(list, ft_lstnew(n));
+		}
+		else
+			error(*list);
+	}
 }
 
-void	sort_arr(int **arr, int ac)
+//função para verificar se é um número aceitável,
+//sem sinais a mais ou letras
+
+int	check_int(char *s)
 {
 	int	i;
-	int	j;
-	int	tmp;
 
-	j = 1;
-	while (j > 0)
+	i = 0;
+	if (s[i] == '+' || s[i] == '-')
+		i++;
+	if (s[i] == '\0')
+		return (0);
+	while (s[i])
 	{
-		i = 0;
-		j = 0;
-		while (i < (ac - 1))
-        {
-            if((*arr)[i] > (*arr)[i + 1])
-            {
-                tmp = (*arr)[i];
-                (*arr)[i] = (*arr)[i + 1];
-                (*arr)[i + 1] = tmp;
-                j++;   
-            }
-            i++;
-        }
+		if (s[i] >= '0' && s[i] <= '9')
+			i++;
+		else
+			return (0);
 	}
+	return (1);
 }
 
-int	*creat_arr(t_list **stack_a, int ac)
+//função para verificar se o número colocada na lista
+//é repetido, entao compara o atual com os que já estão na lista
+int	check_repeat(t_list **list, int n)
 {
-	int		*array;
 	t_list	*tmp;
-	int		i;
-		retrun NULL;
 
-	tmp = *stack_a;
-	array = malloc(ac * sizeof(int));
-	i = 0;
-	if (!array)
+	tmp = *list;
 	while (tmp)
 	{
-		array[i] = tmp;
-		tmp = tmp->next;
+		if (tmp->num != n)
+			tmp = tmp->next;
+		else
+			return (1);
+	}
+	return (0);
+}
+
+//função que transforma char para int
+long long	ft_atoi(char *s)
+{
+	long long	i;
+	long long	res;
+	long long	sign;
+
+	i = 0;
+	res = 0;
+	sign = 1;
+	if (s[i] == '-' || s[i] == '+')
+	{
+		if (s[i] == '-')
+			sign *= -1;
 		i++;
 	}
-	sort_arr(&array, ac);
-	return (array);
+	while (s[i] >= '0' && s[i] <= '9' && s[i])
+	{
+		res *= 10;
+		res += s[i] - 48;
+		i++;
+	}
+	return (sign * res);
 }
 
-void    get_values(t_piece *piece, int *arr, int len, int flag)
+//função para casos de erros
+void	error(t_list *list)
 {
-    if(flag == 1)
-    {
-        piece->i_min = 0;
-        piece->i_max = len; 
-    }
-    else 
-    {
-        piece->i_min = len;
-        piece->i_max = piece->i_min + len;
-    }
-    piece->min = arr[piece->i_min];
-    piece->max = arr[piece->i_max];
-}
-
-int    exist_piece(t_list **stack_a, t_piece piece)
-{
-    t_list *tmp;
-    tmp = *stack_a;
-
-    while(tmp)
-    {
-        if(tmp->num >= piece.min && tmp->num <= piece.max)
-            return 1;
-        tmp = tmp->next;
-    }
-    return 0;
-}
-
-void    push_piece(t_list **stack_a, t_list **stack_b, t_piece pc, int nb)
-{
-    if(*stack_a)
-    {
-        if((*stack_a)->num >= pc.min && (*stack_a)->num <= pc.max)
-            do_push(stack_b, stack_a, 'b');
-        else
-        {
-            if(nb == 2)
-            {
-                do_push(stack_b, stack_a, 'b');
-                do_rotate(stack_b, 'b');
-            }
-            else
-                do_rotate(stack_a, 'a');
-        }
-    }
+	ft_lstclear(&list);
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }

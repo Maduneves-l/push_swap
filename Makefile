@@ -10,9 +10,9 @@ CC = cc
 #					SOURCES AND OBJS					 #
 ##########################################################
 
-SRCS = src/main.c src/f_list.c src/errors.c \
+SRCS = src/main.c src/utils.c src/f_list.c \
 		src/moves.c src/moves_d.c \
-		src/algo_3.c src/algo_5.c \
+		src/sort_3.c src/sort_5.c src/radix.c \
 
 INCLUDES = includes
 
